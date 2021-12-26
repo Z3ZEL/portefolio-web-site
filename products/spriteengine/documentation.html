@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sprite Engine Doc</title>
+    <link rel="stylesheet" href="documentationStyle.css" />
+        <p class="banner_title">Documentation for Sprite Engine</p> 
+    </head>
+    
+    
+
+<body>
+    <div class="classDoc">
+        <h1>SpriteEngine class</h1>
+            <h2>Constructors</h2>
+                <div class="item">
+                    <h3><span class="method">SpriteEngine</span>(<span class="var">SpriteRenderer</span> renderer,<span class="var">Sprite[]</span> sprites,<span class="var">float</span> duration,<span class="var">bool</span> loop)</h3>
+                    <h3><span class="method">SpriteEngine</span>(<span class="var">Image</span> renderer,<span class="var">Sprite[]</span> sprites,<span class="var">float</span> duration,<span class="var">bool</span> loop)</h3>
+                    <h4>Set the basic property, as the renderer for the animation, the Sprites property and the Duration property. Note that it works with a SpriteRenderer component but also on Image component. the loop parameter is optional its default value will be false.</h4>
+                </div>
+            <h2>Methods</h2>
+                <div class='item'>
+                    <h3><span class='var'>void</span> <span class="method">PlaySpriteAnim</span>()</h3>
+                    <h4>Launch the animation return with no effect if :
+                      <br>  -  the instance is already animating
+                       <br> -  the Sprites array is null or empty
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>void</span> <span class="method">StopSpriteAnim</span>()</h3>
+                    <h4>Stop the animation and reset the Renderer to the first sprite of the array, return with no effect if : 
+                        <br>- the instance is not animating
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>void</span> <span class="method">PauseSpriteAnim</span>()</h3>
+                    <h4>Pause the animation at the frame, call <span class="method">PlaySpriteAnim</span>() and it will resume. Return with no effect if : 
+                        <br>- the instance is not animating
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>void</span> <span class="method">Restart</span>()</h3>
+                    <h4>
+                        It’s just <span class="method">StopSpriteAnim</span>() and <span class="method">PlaySpriteAnim</span>(), it restarts the animation, it’s useful when you want to apply parameters (as sprites array for instance) and refresh the animation.
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>void</span> <span class="method">AddCustomSpriteTiming</span>(<span class='var'>int</span> spriteIndex,<span class='var'>float</span> timeGapPerCent,<span class='var'>Action</span> customEvent)</h3>
+                    <h4>
+                        Add a CustomTime object (see the <span class='method'>CustomTime</span> class) at index 
+                        in the <span class='h'>Sprites</span> property .It sets <span class='h'>timeGapPerCent</span> property to
+                        timeGapPerCent , the customEvent as a action to <span class='h'>Event</span> property 
+                        and finally sets the <span class='h'>spriteIndex</span> property to spriteIndex property.
+                        If there already is a custom sprite timing at the spriteIndex,
+                        it will override it.
+                        <br>return with no effect if :<br> - sprites array is null or empty
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>void</span> <span class="method">RemoveCustomTimeAtSpriteIndex</span>(<span class='var'>int</span> index)</h3>
+                    <h4>
+                        Remove a custom time at index in the <span class='h'>Sprites</span> property.
+                        <br>return with no effect if :<br> - there is no custom time at the index.
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>bool</span> <span class="method">isAlreadyCustomTimeAtSpriteIndex</span>(<span class='var'>int</span> index)</h3>
+                    <h4>
+                        return true if there is a
+                        customTime at index in the <span class='h'>Sprites</span> property. return false if there is'nt.
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>CustomTime</span> <span class="method">GetCustomTimeAtSpriteIndex</span>(<span class='var'>int</span> index)</h3>
+                    <h4>
+                        return a CustomTime object if there is custom time at index in the <span class='h'>Sprites</span> property. Return null if there is'nt.
+                    </h4>
+                </div>
+            <h2>Properties</h2>
+                <div class='item'>
+                    <h3><span class='var'>Sprite[]</span> Sprites</h3>
+                    <h4>
+                        It stores all the sprites of the animation (you have to put them in the chronological order)
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>bool</span> Loop</h3>
+                    <h4>
+                        true -> animation will loop <br>false -> animation won’t loop
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>float</span> duration</h3>
+                    <h4>
+                        the total time which the animation last.
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>CustomTime[]</span> CustomTimes</h3>
+                    <h4>
+                        It stores all the CustomTime objets, but we recommend you to manipulate
+                        customtime throughout the CustomTime methods in the SpriteEngine class.
+                        (<span class='method'>GetCustomTimeAtSpriteIndex</span>() for instance)
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>CustomTimeEvent</span> OnStart</h3>
+                    <h4>
+                        It stores a CustomTimeEvent, this CustomTimeEvent
+                        will be call at the start of each animation cycle. 
+                        You can add action to it by calling <span class="method">AddListener</span>()
+                        method.
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>CustomTimeEvent</span> OnEnd</h3>
+                    <h4>
+                        It stores a CustomTimeEvent, this CustomTimeEvent will
+                        be call at the end of each animation cycle.
+                    </h4>
+                </div>
+                <div class='item'>
+                    <h3><span class='var'>CustomTimeEvent</span> OnEndFrame</h3>
+                    <h4>
+                        it stores a CustomTimeEvent, this CustomTimeEvent will
+                        be call at the end of each frame of the animation.
+                        <br>NOTE : These 3 events are just CustomTimeEvent at the end 
+                        either the first, the last or each sprite. There are here to avoid 
+                        creating CustomTime for these basic events. 
+                    </h4>
+                </div>
+            <h2>Properties (readonly)</h2>
+            <div class='item'>
+                <h3><span class='var'>bool</span> IsPlaying</h3>
+                <h4>
+                    true -> animation is playing <br> false -> the animation is not playing
+                </h4>
+            </div>
+            <div class='item'>
+                <h3><span class='var'>bool</span> IsPaused</h3>
+                <h4>
+                    true -> animation is paused <br> false -> the animation is not paused                </h4>
+            </div>
+
+
+ 
+ 
+    </div>
+    <div class="classDoc">
+        <h1>CustomTime class</h1>
+            <h2>Constructors</h2>
+                <div class="item">
+                    <h3><span class='method'>CustomTime</span>(<span class='var'>float</span> duration,<span class='var'>float</span> spriteLength,<span class='var'>int</span> index)</h3>
+                    <h4>
+                        These parameters set a <span class='h'>timeGapPerCent</span> equal
+                        to the average sprite duration at index in
+                        the <span class='h'>Sprites</span> array. In other word, this constructor
+                        create a new CustomTime without affecting 
+                        the animation yet. Remember that
+                        AddCustomSpriteTiming() in the SpriteEngine 
+                        class handle all of this. It also create a
+                        CustomTimeEvent instance. It also set the
+                        spriteIndex to index. Use this object if you're sure of
+                        what you are doing.
+                    </h4>
+                </div>
+            <h2>Methods</h2>
+                <div class="item">
+                    <h3><span class='var'>void</span> <span class="method">newEvent</span>(<span class='var'>UnityAction</span> action)</h3>
+                    <h4>
+                        Add a non persistent listener (action) to the
+                        Event property.
+                    </h4>
+                </div>
+            <h2>Properties</h2>
+                <div class="item">
+                    <h3><span class="var">int</span> spriteIndex</h3>
+                    <h4>
+                        the index of the Sprites property on which the custom event is.
+                    </h4>
+                </div>
+                <div class="item">
+                    <h3><span class="var">float</span> timeGapPerCent</h3>
+                    <h4>
+                        it represents how much (per cent) the sprite
+                        (spriteIndex) will take on the total duration.
+                        For instance if the Duration is 2sec and the 
+                        first sprite has a CustomEvent with timeGapPerCent
+                        of 50, the first sprite will last 1sec and all the
+                        others 1sec.
+                    </h4>
+                </div>
+                <div class="item">
+                    <h3><span class="var">CustomTimeEvent</span> Event</h3>
+                    <h4>
+                        A CustomTimeEvent invoked each time the sprite (spriteIndex) is shown in the animation                    </h4>
+                </div>
+        
+    </div>
+    <div class='classDoc'>
+        <h1>CustomTimeEvent class</h1>
+        <div class='item'>
+            <h2>Derives from UnityEvent</h2>
+                <h3>
+                    It’s a class to handle all events in the SpriteEngine class. You can access for
+                    instance to the AddListener method which allows you to add an UnityAction to it. You
+                    can call custom methods easily thanks to this.
+                </h3>
+        </div>
+    </div>
+    <div class='classDoc'>
+        <h1>SpriteAnimator class/component</h1>
+        <div class='item'>
+            <h3>This component allows you to set up quickly an animation throughout the editor. You
+                can easily access to main features of the SpriteEngine. As its property : duration,
+                loop, sprites,OnStart,OnEnd,OnEndEvent. But you can also add custom time to
+                sprite thank to this interface.</h3>
+            <img src='res/screenshot.png'>
+            <h3>This is what the SpriteAnimator component looks like.</h3>
+        </div>
+        <h2>Caption</h2>
+            <div class='item'>
+                <h3>1.</h3>
+                <h4>
+                    Sprites property, drag and drop all your sprites in the chronological order.
+                </h4>
+                <h3>2.</h3>
+                <h4>
+                    Duration property, to set the duration of the animation.  
+                </h4>
+                <h3>3.</h3>
+                <h4>
+                    Add persistent listener to OnEnd,OnStart,OnEndFrame Event
+                </h4>
+                <h3>4.</h3>
+                <h4>
+                    Two bools parameters.<br> Loop -> to set the Loop property, animation will loop or not
+                    and the <br>PlayOnAwake property -> if the animation will start on Awake(On play) or
+                    not.(If not you’ll have to Play the animation thank to a script).               
+                </h4>
+                <h3>CustomTime Editor :</h3>
+                <h3>5.</h3>
+                <h4>
+                    To add a persistent listener to the CustomTimeEvent of the selected CustomTime.                </h4>
+                <h3>6.</h3>
+                <h4>
+                    The spriteIndex property, a whole number slider which allows you to chose the
+                    sprite which you want to add a CustomTime                </h4>
+                <h3>7.</h3>
+                <h4>
+                    The timeGapPerCent property, a slider to set timeGapPerCent. No worry if the
+                    slider doesn’t reach 99, all your CustomTime added can’t be over 99 so the slider is
+                    automatically updated.
+                </h4>
+                <h3>8.</h3>
+                <h4>
+                    The navigation panel. The CustomTime that you’re currently editing is shown
+                    thank to the “2 / 3” label. If you want to add one CustomTime more click on “+++”
+                    button, you can navigate and see all your CustomTimes thank to the rigth and left
+                    arrow. Note that once you’ve added a CustomTime you don’t need to confirm
+                    anything.
+                </h4>
+
+            </div>
+        <h2>Methods</h2>
+            <div class='item'>
+                <h3><span class="var">void</span> <span class="method">Apply</span>()</h3>
+                <h4>
+                    If you made a variable changement at runtime without the editor, you’ll
+                    need to call this method to Apply changements you’ve made.
+                </h4>
+            </div>
+        <h2>Properties</h2>
+            <div class='item'>
+            <h3>Same properties than the SpriteEngine class</h3>
+            </div>
+            <div class='item'>
+                <h3><span class="var">SpriteEngine</span> Engine</h3>
+                <h4>
+                    access to the instance -> Access to Play,Pause,Stop
+                    methods, property(we recommand you to change the SpriteAnimator property then
+                    call the Apply() method instead of directly change property in Engine property)
+                </h4>
+            </div>
+    </div>
+
+
+
+
+</body>
+
+
+
+
+</html>
