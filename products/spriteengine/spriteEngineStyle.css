@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'neuton';
+    src: url('../../res/Neuton-Regular.ttf');
+}
+@font-face {
+    font-family: 'xperiment';
+    src: url('../../res/XperimentypoThreeSquare.ttf');
+}
+
+.banner_title
+{
+    color : #4a494d;
+    font-size: 300%;
+    text-align: center;
+    background-color: #FF665A;
+    border-width: 80%;
+    border-color: #4a494d;
+    border-style: dashed;
+    border-radius: 10px;
+    font-family: 'xperiment';
+}
+.logo 
+{
+    width: 50%;
+    height: 50%;
+    flex-basis: 40%;
+
+}
+.description
+{
+    color : #4a494d;
+    font-family: 'neuton';
+    padding-left: 5%;
+    padding-right: 5%;
+    
+}
+.content
+{
+    background-color: #fff587;
+    border-radius: 15px;
+    justify-content: center;
+    display: flex;
+    
+
+    margin-left:10%;
+    margin-right: 10%;
+
+    margin-bottom: 2%;
+
+}
+body
+{
+    background-color: #332933;  
+
+}
+.back{
+    width:5%;
+    height:5%;
+
+    text-align: left;
+    margin-left: 2%;
+}
